@@ -1,0 +1,26 @@
+def main():
+    frequencias = {}
+
+    while True:
+        entrada = input("Digite um número inteiro ou 'f' para sair: ")
+        
+        if entrada.lower() == 'f':
+            break
+        
+        try:
+            numero = int(entrada)
+            if numero in frequencias:
+                frequencias[numero] += 1
+            else:
+                frequencias[numero] = 1
+        except ValueError:
+            # Ignora o erro e continua
+            continue
+
+    for numero, contagem in frequencias.items():
+        print(f"O número {numero} apareceu {contagem} vezes")
+
+    print("Fim...")
+
+if __name__ == "__main__":
+    main()
