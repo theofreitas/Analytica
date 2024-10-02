@@ -1,0 +1,49 @@
+#Calculadora de troco
+
+def calcularnotas(valor):
+   
+    notas = [100.00, 50.00, 20.00, 10.00, 5.00, 2.00]
+    moedas = [1.00, 0.50, 0.25, 0.10, 0.05, 0.01]
+
+    resultado_notas = {}
+    resultado_moedas = {}
+
+    for nota in notas:
+        quantidade = int(valor // nota)
+        resultado_notas[nota] = quantidade
+        valor -= quantidade * nota
+
+    for moeda in moedas:
+        quantidade = int(round(valor // moeda))
+        resultado_moedas[moeda] = quantidade
+        valor -= quantidade * moeda
+
+    return resultado_notas, resultado_moedas
+
+def main():
+    while True:
+        entrada = input("Digite um valor monetário (ex: 576.73) ou 'f' para sair: ")
+        if entrada.lower() == 'f':
+            print("Fim...")
+            break
+        try:
+            valor = float(entrada)
+            if valor < 0:
+                raise ValueError("Valor deve ser positivo.")
+        except ValueError:
+            print("Input inválido")
+            continue
+        
+        notas, moedas = calcularnotas(valor)
+        
+        print("NOTAS:")
+        for nota, quantidade in notas.items():
+            print(f"{quantidade} nota(s) de R$ {nota:.2f}")
+        
+        print("MOEDAS:")
+        for moeda, quantidade in moedas.items():
+            print(f"{quantidade} moeda(s) de R$ {moeda:.2f}")
+
+if __name__ == "__main__":
+    main()
+
