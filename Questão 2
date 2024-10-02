@@ -1,0 +1,41 @@
+def movimentos_cavalo(posicao):
+    
+    colunas = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8}
+    movimentos = []
+
+    direcoes = [
+        (2, 1), (2, -1), (-2, 1), (-2, -1),
+        (1, 2), (1, -2), (-1, 2), (-1, -2)
+    ]
+
+    try:
+        coluna = colunas[posicao[0].lower()]
+        linha = int(posicao[1])
+
+        if coluna < 1 or coluna > 8 or linha < 1 or linha > 8:
+            raise ValueError
+
+        for d in direcoes:
+            nova_coluna = coluna + d[0]
+            nova_linha = linha + d[1]
+            if 1 <= nova_coluna <= 8 and 1 <= nova_linha <= 8:
+                for letra, num in colunas.items():
+                    if num == nova_coluna:
+                        movimentos.append(f"{letra}{nova_linha}")
+
+    except (KeyError, ValueError):
+        return "Input inválido"
+
+    return ", ".join(movimentos)
+
+def main():
+    while True:
+        entrada = input("Digite a posição inicial do cavalo (ex: d4) ou 'f' para sair: ")
+        if entrada.lower() == 'f':
+            print("Fim...")
+            break
+        resultado = movimentos_cavalo(entrada)
+        print(resultado)
+
+if __name__ == "__main__":
+    main()
