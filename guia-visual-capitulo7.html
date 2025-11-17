@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 7: Teoria Populacional - Guia Visual de Estudos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        /* Cores temáticas para cada seção */
+        .joint-life {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-left: 5px solid #f39c12;
+        }
+
+        .joint-life .section-title {
+            color: #d35400;
+            border-bottom-color: #e67e22;
+        }
+
+        .last-survivor {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            border-left: 5px solid #5f27cd;
+            color: white;
+        }
+
+        .last-survivor .section-title {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .binomial {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            border-left: 5px solid #0652DD;
+            color: white;
+        }
+
+        .binomial .section-title {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .multinomial {
+            background: linear-gradient(135deg, #81ecec 0%, #00cec9 100%);
+            border-left: 5px solid #00b894;
+        }
+
+        .multinomial .section-title {
+            color: #006266;
+            border-bottom-color: #00b894;
+        }
+
+        .tcl {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            border-left: 5px solid #d63031;
+            color: white;
+        }
+
+        .tcl .section-title {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .concept-box {
+            background: rgba(255,255,255,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid rgba(0,0,0,0.2);
+        }
+
+        .formula-box {
+            background: rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            border: 2px dashed rgba(0,0,0,0.3);
+        }
+
+        .highlight {
+            background: rgba(255,255,255,0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+
+        .key-point .bullet {
+            font-size: 1.5em;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .questions-section {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            border-left: 5px solid #00695c;
+        }
+
+        .questions-section .section-title {
+            color: #004d40;
+            border-bottom-color: #00695c;
+        }
+
+        .question-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .question-card h4 {
+            color: #00695c;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-tag {
+            display: inline-block;
+            background: #ffb142;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .visual-diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .visual-diagram svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .tip-box {
+            background: #fffbea;
+            border: 2px solid #ffd93d;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .tip-box::before {
+            content: "💡 DICA IMPORTANTE";
+            display: block;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .warning-box {
+            background: #ffe5e5;
+            border: 2px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .warning-box::before {
+            content: "⚠️ ATENÇÃO";
+            display: block;
+            font-weight: bold;
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .section:hover {
+                transform: none;
+            }
+        }
+
+        .notation-badge {
+            display: inline-block;
+            background: rgba(0,0,0,0.2);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 5px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Capítulo 7: Teoria Populacional</h1>
+            <p>Análise Multividas - Guia Visual Completo para Estudo</p>
+        </div>
+
+        <div class="content">
+
+            <!-- Premissa Fundamental -->
+            <div class="section" style="background: linear-gradient(135deg, #ff9ff3 0%, #feca57 100%); border-left: 5px solid #ee5a6f;">
+                <h2 class="section-title" style="color: #c0392b; border-bottom-color: #ee5a6f;">
+                    <span class="icon">🎯</span> Premissa Fundamental
+                </h2>
+                <div class="concept-box">
+                    <div class="key-point">
+                        <span class="bullet">✓</span>
+                        <div>
+                            <strong>Independência entre riscos:</strong> A morte de um indivíduo NÃO afeta a probabilidade de morte dos outros
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <span class="bullet">✓</span>
+                        <div>
+                            <strong>Mesma população:</strong> Todos os indivíduos seguem a mesma tábua de mortalidade (salvo indicação contrária)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status de Vida Conjunta -->
+            <div class="section joint-life">
+                <h2 class="section-title">
+                    <span class="icon">👥</span> 1. Status de Vida Conjunta (Primeira Morte)
+                </h2>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">🎯 Conceito Central</h3>
+                    <p style="font-size: 1.1em;">
+                        O grupo permanece <span class="highlight">INTACTO</span> enquanto <strong>TODOS</strong> estiverem vivos.
+                        <br>O status <strong>FALHA</strong> na ocorrência da <span class="highlight">PRIMEIRA MORTE</span>.
+                    </p>
+                </div>
+
+                <div class="visual-diagram">
+                    <h4 style="color: #d35400; margin-bottom: 15px;">Representação Visual</h4>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="background: #2ecc71; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            😊 Pessoa 1<br>VIVA
+                        </div>
+                        <div style="font-size: 2em;">∧</div>
+                        <div style="background: #2ecc71; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            😊 Pessoa 2<br>VIVA
+                        </div>
+                        <div style="font-size: 2em;">∧</div>
+                        <div style="background: #2ecc71; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            😊 Pessoa N<br>VIVA
+                        </div>
+                        <div style="font-size: 2em;">→</div>
+                        <div style="background: #27ae60; color: white; padding: 25px; border-radius: 15px; font-weight: bold; font-size: 1.2em;">
+                            ✓ STATUS OK
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="background: #2ecc71; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            😊 Pessoa 1<br>VIVA
+                        </div>
+                        <div style="font-size: 2em;">∧</div>
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            ☠️ Pessoa 2<br>MORTA
+                        </div>
+                        <div style="font-size: 2em;">→</div>
+                        <div style="background: #c0392b; color: white; padding: 25px; border-radius: 15px; font-weight: bold; font-size: 1.2em;">
+                            ✗ STATUS FALHA
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">📝 Notação</h3>
+                    <p style="font-size: 1.2em;">
+                        <span class="notation-badge">X̲ₙ</span> (o sublinhado indica que <strong>TODOS</strong> devem sobreviver)
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <div style="margin-bottom: 10px;">🟢 PROBABILIDADE DE SOBREVIVÊNCIA (todos vivem):</div>
+                    ₙpₓ̲ₙ = ₙpₓ₁ × ₙpₓ₂ × ... × ₙpₓₙ = ∏ᵢ₌₁ᴺ ₙpₓᵢ
+                </div>
+
+                <div class="tip-box">
+                    <strong>Se todos tiverem a mesma idade x:</strong>
+                    <div style="margin-top: 10px; font-size: 1.2em; text-align: center;">
+                        ₙpₓ̲ₙ = (ₙpₓ)ᴺ
+                    </div>
+                </div>
+
+                <div class="formula-box" style="margin-top: 20px;">
+                    <div style="margin-bottom: 10px;">🔴 PROBABILIDADE DE FALHA (pelo menos um morre):</div>
+                    ₙqₓ̲ₙ = 1 - ₙpₓ̲ₙ = 1 - ∏ᵢ₌₁ᴺ ₙpₓᵢ
+                </div>
+            </div>
+
+            <!-- Status de Último Sobrevivente -->
+            <div class="section last-survivor">
+                <h2 class="section-title">
+                    <span class="icon">👤</span> 2. Status de Último Sobrevivente (Última Morte)
+                </h2>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">🎯 Conceito Central</h3>
+                    <p style="font-size: 1.1em;">
+                        Foca na <span class="highlight">EXTINÇÃO DO GRUPO</span>.
+                        <br>O status <strong>FALHA</strong> apenas quando ocorre a <span class="highlight">ÚLTIMA MORTE</span>.
+                    </p>
+                </div>
+
+                <div class="visual-diagram">
+                    <h4 style="color: white; margin-bottom: 15px;">Representação Visual</h4>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            ☠️ Pessoa 1<br>MORTA
+                        </div>
+                        <div style="font-size: 2em; color: white;">∧</div>
+                        <div style="background: #2ecc71; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            😊 Pessoa 2<br>VIVA
+                        </div>
+                        <div style="font-size: 2em; color: white;">→</div>
+                        <div style="background: #27ae60; color: white; padding: 25px; border-radius: 15px; font-weight: bold; font-size: 1.2em;">
+                            ✓ STATUS OK<br>(ainda há vivos)
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            ☠️ Pessoa 1<br>MORTA
+                        </div>
+                        <div style="font-size: 2em; color: white;">∧</div>
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            ☠️ Pessoa 2<br>MORTA
+                        </div>
+                        <div style="font-size: 2em; color: white;">∧</div>
+                        <div style="background: #e74c3c; color: white; padding: 20px; border-radius: 10px; font-weight: bold;">
+                            ☠️ Pessoa N<br>MORTA
+                        </div>
+                        <div style="font-size: 2em; color: white;">→</div>
+                        <div style="background: #c0392b; color: white; padding: 25px; border-radius: 15px; font-weight: bold; font-size: 1.2em;">
+                            ✗ STATUS FALHA<br>(todos mortos)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">📝 Notação</h3>
+                    <p style="font-size: 1.2em;">
+                        <span class="notation-badge">X̄ₙ</span> (a barra superior indica <strong>ÚLTIMO SOBREVIVENTE</strong>)
+                    </p>
+                </div>
+
+                <div class="formula-box">
+                    <div style="margin-bottom: 10px;">🔴 PROBABILIDADE DE FALHA (todos morrem):</div>
+                    ₙqX̄ₙ = ₙqₓ₁ × ₙqₓ₂ × ... × ₙqₓₙ = ∏ᵢ₌₁ᴺ ₙqₓᵢ
+                </div>
+
+                <div class="tip-box" style="background: #e8f5e9; border-color: #4caf50;">
+                    <strong>Se todos tiverem a mesma idade x:</strong>
+                    <div style="margin-top: 10px; font-size: 1.2em; text-align: center;">
+                        ₙqX̄ₙ = (ₙqₓ)ᴺ
+                    </div>
+                </div>
+
+                <div class="formula-box" style="margin-top: 20px;">
+                    <div style="margin-bottom: 10px;">🟢 PROBABILIDADE DE SOBREVIVÊNCIA (pelo menos um vive):</div>
+                    ₙpX̄ₙ = 1 - ₙqX̄ₙ = 1 - ∏ᵢ₌₁ᴺ ₙqₓᵢ
+                </div>
+            </div>
+
+            <!-- Tabela Comparativa -->
+            <div class="section" style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); border-left: 5px solid #e17055;">
+                <h2 class="section-title" style="color: #d63031; border-bottom-color: #e17055;">
+                    <span class="icon">⚖️</span> Comparação: Joint Life vs Last Survivor
+                </h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Característica</th>
+                            <th style="width: 37.5%; background: #fdcb6e;">Joint Life (X̲ₙ)</th>
+                            <th style="width: 37.5%; background: #a29bfe;">Last Survivor (X̄ₙ)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Foco</strong></td>
+                            <td style="background: #ffeaa7;">Grupo permanecer INTACTO</td>
+                            <td style="background: #dfe6e9;">EXTINÇÃO do grupo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Falha quando</strong></td>
+                            <td style="background: #ffeaa7;">PRIMEIRA morte ocorre</td>
+                            <td style="background: #dfe6e9;">ÚLTIMA morte ocorre</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Notação</strong></td>
+                            <td style="background: #ffeaa7;">Sublinhado (X̲ₙ)</td>
+                            <td style="background: #dfe6e9;">Barra superior (X̄ₙ)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sobrevivência</strong></td>
+                            <td style="background: #ffeaa7;"><strong>TODOS</strong> devem sobreviver<br>∏ ₙpₓᵢ</td>
+                            <td style="background: #dfe6e9;"><strong>PELO MENOS UM</strong> deve sobreviver<br>1 - ∏ ₙqₓᵢ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Falha</strong></td>
+                            <td style="background: #ffeaa7;"><strong>PELO MENOS UM</strong> morre<br>1 - ∏ ₙpₓᵢ</td>
+                            <td style="background: #dfe6e9;"><strong>TODOS</strong> morrem<br>∏ ₙqₓᵢ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modelo Binomial -->
+            <div class="section binomial">
+                <h2 class="section-title">
+                    <span class="icon">🎲</span> 3. Modelo Binomial (Grupos Homogêneos)
+                </h2>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">🎯 Quando Usar</h3>
+                    <p style="font-size: 1.1em;">
+                        ✓ <strong>N indivíduos de MESMA IDADE</strong><br>
+                        ✓ Queremos saber: "Quantos (k) satisfazem um evento?"<br>
+                        ✓ Exemplos: quantos sobrevivem? quantos morrem?
+                    </p>
+                </div>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">📊 Variável Aleatória</h3>
+                    <p style="font-size: 1.1em;">
+                        <span class="highlight">Sₙ = número de sucessos</span><br>
+                        Sₙ ~ Binomial(N, Prob)
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <strong>Prob</strong> = probabilidade individual do evento<br>
+                        Exemplos: ₙpₓ (sobreviver) ou ₙqₓ (morrer)
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    <div style="margin-bottom: 15px;">📐 FÓRMULA BINOMIAL:</div>
+                    P(Sₙ = k) = [N! / (k!(N-k)!)] × (Prob)ᵏ × (1-Prob)ᴺ⁻ᵏ
+                    <div style="margin-top: 15px; font-size: 0.9em;">
+                        onde: N! / (k!(N-k)!) = combinação "N escolhe k" = C(N,k)
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Média e Variância da Binomial:</strong>
+                    <div style="margin-top: 10px;">
+                        • Média (μ) = N × Prob<br>
+                        • Variância (σ²) = N × Prob × (1 - Prob)<br>
+                        • Desvio Padrão (σ) = √(N × Prob × (1 - Prob))
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Limitação:</strong> Para N muito grande (ex: N ≥ 100), os fatoriais ficam inviáveis de calcular!<br>
+                    <strong>Solução:</strong> Use o Teorema Central do Limite (TCL) → veja seção 5
+                </div>
+            </div>
+
+            <!-- Modelo Multinomial -->
+            <div class="section multinomial">
+                <h2 class="section-title">
+                    <span class="icon">🎯</span> 4. Modelo Multinomial (Categorias Disjuntas)
+                </h2>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">🎯 Quando Usar</h3>
+                    <p style="font-size: 1.1em;">
+                        ✓ Dividimos o grupo em <strong>3 ou mais categorias</strong><br>
+                        ✓ As categorias formam uma <span class="highlight">PARTIÇÃO</span>:<br>
+                        &nbsp;&nbsp;&nbsp;→ São disjuntas (sem interseção)<br>
+                        &nbsp;&nbsp;&nbsp;→ Cobrem todo o espaço amostral
+                    </p>
+                </div>
+
+                <div class="visual-diagram">
+                    <h4 style="color: #006266; margin-bottom: 15px;">Exemplo Visual de Partição</h4>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+                        <div style="background: #55efc4; padding: 20px; border-radius: 10px; flex: 1; min-width: 150px;">
+                            <strong>Categoria 1</strong><br>
+                            Vivos após n anos<br>
+                            P₁ = ₙpₓ
+                        </div>
+                        <div style="background: #fdcb6e; padding: 20px; border-radius: 10px; flex: 1; min-width: 150px;">
+                            <strong>Categoria 2</strong><br>
+                            Mortos entre [0, 10]<br>
+                            P₂ = ₁₀qₓ
+                        </div>
+                        <div style="background: #fab1a0; padding: 20px; border-radius: 10px; flex: 1; min-width: 150px;">
+                            <strong>Categoria 3</strong><br>
+                            Mortos após 10 anos<br>
+                            P₃ = ₁₀pₓ × q₍ₓ₊₁₀₎
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-weight: bold; color: #00695c;">
+                        P₁ + P₂ + P₃ = 1 ✓ (partição válida)
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <strong>CUIDADO:</strong> Não pode haver interseção entre os intervalos de tempo ou idades!<br>
+                    <strong>Exemplo ERRADO:</strong> [0-10] e [5-15] (se sobrepõem!)<br>
+                    <strong>Exemplo CERTO:</strong> [0-10) e [10-20) (disjuntos!)
+                </div>
+
+                <div class="formula-box">
+                    <div style="margin-bottom: 15px;">📐 FÓRMULA MULTINOMIAL:</div>
+                    P(Y = y) = [N! / (∏ yⱼ!)] × ∏ Pⱼʸʲ
+                    <div style="margin-top: 15px; font-size: 0.9em;">
+                        onde:<br>
+                        • yⱼ = número de indivíduos na categoria j<br>
+                        • Pⱼ = probabilidade individual de estar na categoria j<br>
+                        • ∑ yⱼ = N (total de indivíduos)
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Exemplo Prático:</strong><br>
+                    100 pessoas de 30 anos. Queremos: 60 vivas, 25 mortas [0-10], 15 mortas [10-20]
+                    <div style="margin-top: 10px; font-family: monospace;">
+                        P = [100!/(60!×25!×15!)] × P₁⁶⁰ × P₂²⁵ × P₃¹⁵
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teorema Central do Limite -->
+            <div class="section tcl">
+                <h2 class="section-title">
+                    <span class="icon">📊</span> 5. Teorema Central do Limite (TCL)
+                </h2>
+
+                <div class="concept-box">
+                    <h3 style="margin-bottom: 15px;">🎯 Quando Usar</h3>
+                    <p style="font-size: 1.1em;">
+                        ✓ Quando N é <strong>MUITO GRANDE</strong> (ex: N ≥ 100)<br>
+                        ✓ Calcular fatoriais gigantes é <span class="highlight">INVIÁVEL</span><br>
+                        ✓ <strong>Solução:</strong> Aproximar Binomial por Normal!
+                    </p>
+                </div>
+
+                <div class="visual-diagram">
+                    <h4 style="color: white; margin-bottom: 15px;">Transformação Binomial → Normal</h4>
+                    <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px;">
+                        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; min-width: 200px;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">🎲</div>
+                            <strong>Sₙ ~ Binomial(N, p)</strong><br>
+                            <span style="font-size: 0.9em;">Difícil calcular<br>quando N é grande</span>
+                        </div>
+                        <div style="font-size: 3em;">→</div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; min-width: 200px;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">📊</div>
+                            <strong>Sₙ ≈ Normal(μ, σ²)</strong><br>
+                            <span style="font-size: 0.9em;">Fácil calcular<br>usando tabela Z</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formula-box">
+                    <div style="margin-bottom: 15px;">📐 PARÂMETROS DA NORMAL:</div>
+                    μ = N × p<br>
+                    σ² = N × p × (1 - p)<br>
+                    σ = √(N × p × (1 - p))
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ CORREÇÃO DE CONTINUIDADE - ESSENCIAL!</strong><br>
+                    <div style="margin-top: 10px;">
+                        Ao passar de distribuição <strong>discreta</strong> (Binomial) para <strong>contínua</strong> (Normal), precisamos ajustar:
+                        <div style="margin-top: 10px; background: white; color: #d63031; padding: 15px; border-radius: 8px; font-weight: bold;">
+                            P(Sₙ ≤ a) ≈ P(Z ≤ (a + 0,5 - μ) / σ)<br>
+                            P(Sₙ ≥ a) ≈ P(Z ≥ (a - 0,5 - μ) / σ)<br>
+                            P(Sₙ = a) ≈ P((a - 0,5 - μ)/σ ≤ Z ≤ (a + 0,5 - μ)/σ)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Passo a passo para usar TCL:</strong>
+                    <ol>
+                        <li>Calcule μ = N × p</li>
+                        <li>Calcule σ² = N × p × (1-p) e σ = √σ²</li>
+                        <li>Aplique a correção de continuidade (±0,5)</li>
+                        <li>Padronize: Z = (x - μ) / σ</li>
+                        <li>Consulte a tabela Normal padrão</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Análise das Questões -->
+            <div class="section questions-section">
+                <h2 class="section-title">
+                    <span class="icon">📝</span> Guia de Resolução das Questões
+                </h2>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q1</span> Grupos Homogêneos com Função s(x)</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">📐 Função s(x) = (1 - x/98)^(2/3)</span>
+                        <span class="strategy-tag">👥 Joint Life</span>
+                        <span class="strategy-tag">👤 Last Survivor</span>
+                        <span class="strategy-tag">🔀 Heterogêneo</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Item (a) e (b):</strong> Use fórmulas de potência (idades iguais)
+                                <ul>
+                                    <li>Item (a): "Todos sobrevivem" → ₙpₓ̲ₙ = (ₙpₓ)ᴺ</li>
+                                    <li>Calcule ₙpₓ = s(x+n) / s(x)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Item (c):</strong> Último sobrevivente (X̄)
+                                <ul>
+                                    <li>Prob. individual de morrer no intervalo: ₙqₓ</li>
+                                    <li>Todos morrerem: (ₙqₓ)ᴺ</li>
+                                    <li>Pelo menos um viver: 1 - (ₙqₓ)ᴺ</li>
+                                </ul>
+                            </li>
+                            <li><strong>Item (d):</strong> Grupo heterogêneo (idades diferentes)
+                                <ul>
+                                    <li>Calcule ₙpₓᵢ para cada idade individualmente</li>
+                                    <li>Multiplique todos: ₙpₓ₁ × ₙpₓ₂ × ... × ₙpₓₙ</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q2</span> Uso da Tábua de Mortalidade</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">📊 Tábua (Cap. 4)</span>
+                        <span class="strategy-tag">👥 Joint vs Last</span>
+                        <span class="strategy-tag">🎯 Cenários Disjuntos</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Item (c):</strong> "Todos viverem pelo menos +1 ano"
+                                <ul>
+                                    <li>É o produtório de pₓ para cada idade</li>
+                                    <li>Para x=1,2,...,80: p₁ × p₂ × ... × p₈₀</li>
+                                    <li>Lembre: pₓ = lₓ₊₁ / lₓ (use a tábua)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Item (f):</strong> "Apenas um sobreviver"
+                                <ul>
+                                    <li>Soma de 3 cenários disjuntos:</li>
+                                    <li>(A vive ∧ B morre ∧ C morre) +</li>
+                                    <li>(B vive ∧ A morre ∧ C morre) +</li>
+                                    <li>(C vive ∧ A morre ∧ B morre)</li>
+                                    <li>Cada termo: pₐ × qᵦ × qᴄ (e variações)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q3</span> Expressões Algébricas</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">🎲 Binomial Lógica</span>
+                        <span class="strategy-tag">🔄 Complementar</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Estratégia:</strong> Expressar em termos de ₙpₓ individuais</li>
+                            <li><strong>Exemplo:</strong> "No máximo 3 vivos de 5"
+                                <ul>
+                                    <li>Forma Direta: P(0) + P(1) + P(2) + P(3)</li>
+                                    <li>Forma Complementar: 1 - [P(4) + P(5)]</li>
+                                    <li>Escolha a forma com menos termos!</li>
+                                </ul>
+                            </li>
+                            <li><strong>Use combinações:</strong> C(5,k) × (pₓ)ᵏ × (qₓ)⁵⁻ᵏ</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q4</span> Contagem e Multinomial</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">🎯 Multinomial</span>
+                        <span class="strategy-tag">📊 TCL (N grande)</span>
+                        <span class="strategy-tag">🔀 Grupos Mistos</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Itens (a) e (b):</strong> Grupos mistos
+                                <ul>
+                                    <li>Metade idade x, metade idade y</li>
+                                    <li>Calcule cada metade separadamente</li>
+                                    <li>Multiplique os resultados (independência)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Itens (c) a (g):</strong> Modelo Multinomial
+                                <ul>
+                                    <li>Verifique se as faixas são disjuntas!</li>
+                                    <li>Defina P₁, P₂, P₃ (prob. de cada faixa)</li>
+                                    <li>Aplique: [N!/(y₁!×y₂!×y₃!)] × P₁^y₁ × P₂^y₂ × P₃^y₃</li>
+                                </ul>
+                            </li>
+                            <li><strong>Item (h):</strong> N=500 é GRANDE!
+                                <ul>
+                                    <li>Use TCL (não calcule fatorial!)</li>
+                                    <li>μ = N × ₙpₓ</li>
+                                    <li>σ² = N × ₙpₓ × ₙqₓ</li>
+                                    <li>Correção de continuidade: 100 → 99,5</li>
+                                    <li>Padronize e use tabela Z</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q5</span> Função Paramétrica s(x) = exp(-x²/3000)</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">📐 Função Exponencial</span>
+                        <span class="strategy-tag">🎯 Multinomial</span>
+                        <span class="strategy-tag">📊 TCL (N=180)</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Diferença da Q4:</strong> Use s(x) em vez da tábua</li>
+                            <li><strong>Calcular probabilidades base:</strong>
+                                <ul>
+                                    <li>ₙpₓ = s(x+n) / s(x)</li>
+                                    <li>Para faixa [a,b]: prob = s(x+a)/s(x) - s(x+b)/s(x)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Item (e):</strong> "Pelo menos 60 morrem em [40,59]"
+                                <ul>
+                                    <li>N=180 é grande → use TCL</li>
+                                    <li>Calcule p = prob. individual de morrer em [40,59]</li>
+                                    <li>μ = 180 × p</li>
+                                    <li>σ = √(180 × p × (1-p))</li>
+                                    <li>P(X ≥ 60) com correção: Z = (59,5 - μ) / σ</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q6</span> Interpretação de Fórmula Complexa</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">🧮 Inclusão-Exclusão</span>
+                        <span class="strategy-tag">🔍 Análise de Padrão</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Observação:</strong> A fórmula lembra P(A∪B∪C...)</li>
+                            <li><strong>Padrão típico:</strong>
+                                <ul>
+                                    <li>Termos somados: pares (2 vivos)</li>
+                                    <li>Termos subtraídos: trios (3 vivos)</li>
+                                    <li>Termos somados: quartetos (4 vivos)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Estratégia:</strong>
+                                <ul>
+                                    <li>Teste com casos simples (2 ou 3 pessoas)</li>
+                                    <li>Verifique se representa "pelo menos k vivos"</li>
+                                    <li>Use lógica de conjuntos para confirmar</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h4><span style="background: #00695c; color: white; padding: 5px 15px; border-radius: 50%;">Q7</span> Engenharia Reversa (Encontrar ₂₅p₂₀)</h4>
+                    <div style="margin-top: 15px;">
+                        <span class="strategy-tag">🧮 Sistema de Equações</span>
+                        <span class="strategy-tag">🔄 Isolamento de Variáveis</span>
+                    </div>
+                    <div style="margin-top: 20px; background: #e0f2f1; padding: 15px; border-radius: 8px; color: #004d40;">
+                        <strong>Como Resolver:</strong>
+                        <ul>
+                            <li><strong>Dados:</strong> Probabilidades conjuntas conhecidas
+                                <ul>
+                                    <li>Exemplo: ₁₀p₂₀:₃₀:₄₀ = 0,758</li>
+                                </ul>
+                            </li>
+                            <li><strong>Relação fundamental:</strong>
+                                <ul>
+                                    <li>₁₀p₂₀:₃₀:₄₀ = ₁₀p₂₀ × ₁₀p₃₀ × ₁₀p₄₀</li>
+                                </ul>
+                            </li>
+                            <li><strong>Estratégia:</strong>
+                                <ol>
+                                    <li>Monte um sistema com as informações dadas</li>
+                                    <li>Use as outras probabilidades conjuntas fornecidas</li>
+                                    <li>Isole os termos que você precisa</li>
+                                    <li>Combine equações para encontrar ₂₅p₂₀</li>
+                                </ol>
+                            </li>
+                            <li><strong>Dica:</strong> Divida equações entre si para eliminar termos!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumo Final -->
+            <div class="section" style="background: linear-gradient(135deg, #a8e6cf 0%, #3dc1d3 100%); border-left: 5px solid #079992;">
+                <h2 class="section-title" style="color: #004d40; border-bottom-color: #079992;">
+                    <span class="icon">🎓</span> Checklist de Estudo - Use Antes da Prova!
+                </h2>
+
+                <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 20px;">
+                    <h3 style="color: #079992; margin-bottom: 20px;">✅ Você Domina Estes Conceitos?</h3>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c1"> <label for="c1"><strong>Diferenciar Joint Life (X̲) vs Last Survivor (X̄)</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ Sublinhado = todos vivos | Barra = extinção</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c2"> <label for="c2"><strong>Aplicar fórmulas de produto para grupos homogêneos</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ (ₙpₓ)ᴺ quando todos têm mesma idade</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c3"> <label for="c3"><strong>Usar Binomial para "quantos satisfazem o evento"</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ C(N,k) × pᵏ × (1-p)ᴺ⁻ᵏ</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c4"> <label for="c4"><strong>Identificar quando usar Multinomial</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ Categorias disjuntas que formam partição</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c5"> <label for="c5"><strong>Aplicar TCL quando N é grande (N ≥ 100)</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ μ = Np, σ² = Np(1-p), CORREÇÃO DE CONTINUIDADE!</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c6"> <label for="c6"><strong>Calcular com função s(x) e com tábua</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ ₙpₓ = s(x+n)/s(x) ou lₓ₊ₙ/lₓ</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c7"> <label for="c7"><strong>Montar cenários disjuntos (apenas 1 vivo, exatamente k vivos)</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ Soma de produtos de probabilidades</span>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <input type="checkbox" id="c8"> <label for="c8"><strong>Usar complementar quando mais eficiente</strong></label><br>
+                        <span style="margin-left: 25px; color: #666;">→ P(A) = 1 - P(Aᶜ)</span>
+                    </div>
+                </div>
+
+                <div style="background: #fffbea; padding: 20px; border-radius: 10px; margin-top: 25px; border: 3px solid #ffd93d;">
+                    <h3 style="color: #f39c12; margin-bottom: 15px;">⚡ Dicas de Ouro para a Prova</h3>
+                    <ol style="color: #333;">
+                        <li><strong>Leia com atenção:</strong> "Todos", "pelo menos um", "exatamente k"</li>
+                        <li><strong>Identifique o tipo:</strong> Joint, Last, Binomial, Multinomial?</li>
+                        <li><strong>N grande?</strong> Pense em TCL imediatamente!</li>
+                        <li><strong>Categorias?</strong> Verifique se são disjuntas!</li>
+                        <li><strong>Correção de continuidade:</strong> NUNCA esqueça no TCL!</li>
+                        <li><strong>Grupos heterogêneos:</strong> Calcule cada idade individualmente</li>
+                        <li><strong>Use complementar:</strong> Às vezes é muito mais rápido!</li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="background: #2c3e50; color: white; padding: 30px; text-align: center;">
+            <p style="font-size: 1.2em; margin-bottom: 10px;">✨ Bons Estudos! Você Consegue! ✨</p>
+            <p style="opacity: 0.8;">Capítulo 7: Teoria Populacional - Análise Multividas</p>
+        </div>
+    </div>
+
+    <script>
+        // Adicionar interatividade aos checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if(this.checked) {
+                    this.parentElement.style.background = '#d4edda';
+                    this.parentElement.style.padding = '10px';
+                    this.parentElement.style.borderRadius = '5px';
+                    this.parentElement.style.transition = 'all 0.3s ease';
+                } else {
+                    this.parentElement.style.background = 'transparent';
+                    this.parentElement.style.padding = '0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
